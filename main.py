@@ -5,18 +5,18 @@ class Node:
         self.right = None
 
 
-class AVLtree():
+class AVLtree:
     def __init__(self, *args):
         self.node = None
         self.bfactor = 0
         self.height = 0
         if len(args) == 1:
-            list = []
+            listtoadd = []
             if isintorfloat(args[0]):
-                list.append(args[0])
+                listtoadd.append(args[0])
             else:
-                list = args[0]
-            for i in list:
+                listtoadd = args[0]
+            for i in listtoadd:
                 self.append(i)
 
     def getheight(self):
@@ -132,5 +132,3 @@ class AVLtree():
 
 def isintorfloat(val):
     return type(val) == int or type(val) == float
-
-
