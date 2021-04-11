@@ -3,7 +3,7 @@ from unittest import TestCase
 from main import AVLtree
 
 
-class TestAVLtree_init(TestCase):
+class TestAVLtreeinit(TestCase):
     def test_initbynone(self):
         testempty = AVLtree()
         self.assertEqual(testempty.node, None)
@@ -11,8 +11,8 @@ class TestAVLtree_init(TestCase):
         self.assertEqual(testempty.bfactor, 0)
 
     def test_initbylist(self):
-        l = [1,2,3,4]
-        testinit = AVLtree(l)
+        baselist = [1, 2, 3, 4]
+        testinit = AVLtree(baselist)
         self.assertEqual(testinit.node.value, 2)
         self.assertEqual(testinit.node.right.node.value, 3)
         self.assertEqual(testinit.node.left.node.value, 1)
@@ -24,16 +24,17 @@ class TestAVLtree_init(TestCase):
         self.assertEqual(testinit.node.right.node.right.getheight(), 1)
 
     def test_initbynum(self):
-        testnum=AVLtree(1)
-        self.assertEqual(testnum.node.value,1)
-        self.assertEqual(testnum.getheight(),1)
+        testnum = AVLtree(1)
+        self.assertEqual(testnum.node.value, 1)
+        self.assertEqual(testnum.getheight(), 1)
         self.assertEqual(testnum.bfactor, 0)
+
 
 class TestAVLappend(TestCase):
     def test_append(self):
-        l = [1, 2, 3, 4]
+        baselist = [1, 2, 3, 4]
         testtree = AVLtree()
-        for i in l:
+        for i in baselist:
             testtree.append(i)
         self.assertEqual(testtree.node.value, 2)
         self.assertEqual(testtree.node.right.node.value, 3)
@@ -45,16 +46,10 @@ class TestAVLappend(TestCase):
         self.assertEqual(testtree.node.right.getheight(), 2)
         self.assertEqual(testtree.node.right.node.right.getheight(), 1)
 
-class TestAVLiscontain(TestCase):
-    def test_iscontain(self):
-        l = [1, 2, 3, 4]
-        testtree= AVLtree(l)
-        self.assertTrue(testtree.iscontain(4))
-        self.assertFalse(testtree.iscontain(7))
 
-
-
-
-
-
-
+class TestAVLcontains(TestCase):
+    def test_contains(self):
+        baselist = [1, 2, 3, 4]
+        testtree = AVLtree(baselist)
+        self.assertTrue(testtree.contains(4))
+        self.assertFalse(testtree.contains(7))
