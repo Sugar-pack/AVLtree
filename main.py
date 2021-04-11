@@ -25,6 +25,12 @@ class AVLtree:
         else:
             return 0
 
+    def getbfactor(self):
+        if self.node:
+            return self.getbfactor
+        else:
+            return 0
+
     def append(self, value):
         prevnode = self.node
         newnode = Node(value)
@@ -37,25 +43,23 @@ class AVLtree:
         elif value > prevnode.value:
             self.node.right.append(value)
         else:
-            self.updateh()
             return False
         self.upd_h_and_b()
         self.fixbalance()
         return True
 
-    def updateh(self):
+    def upd_h(self):
         if self.node is not None:
             lh = 0
             rh = 0
             if self.node.right is not None:
-                self.node.left.updateh()
-                lh = self.node.left.height
+                self.node.left.upd_h()
+                lh = self.node.left.getheight()
             if self.node.right is not None:
-                self.node.right.updateh()
-                rh = self.node.right.height
+                self.node.right.upd_h()
+                rh = self.node.right.getheight()
 
             self.height = max(rh, lh) + 1
-            # print('cur elem=', self.node.value, "cur h=", self.height, "cur rh and lh", rh, lh)
         else:
             self.height = 0
 
@@ -95,7 +99,7 @@ class AVLtree:
         top.right.node = bot
 
     def upd_h_and_b(self):
-        self.updateh()
+        self.upd_h()
         self.upd_bfactor()
 
     def fixbalance(self):
@@ -119,13 +123,13 @@ class AVLtree:
             return True
         return False
 
-    def iscontain(self, value):
-        if self.node.value is None:
+    def contains(self, item):
+        if self.node is None:
             return False
-        elif value < self.node.value:
-            return self.node.left.iscontain(value)
-        elif value > self.node.value:
-            return self.node.right.iscontain(value)
+        elif item < self.node.value:
+            return self.node.left.contains(item)
+        elif item > self.node.value:
+            return self.node.right.contains(item)
         else:
             return True
 
